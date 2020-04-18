@@ -31,7 +31,10 @@ async function runDialogflowQuery(text, sessionId, language_code, credentials) {
 
 // Tutorial 1 - Basic Dialogflow extarnal endpoint
 app.post("/bot/:botid", (req, res) => {
-  const tdclient = new TiledeskChatbotClient({request: req});
+  const tdclient = new TiledeskChatbotClient({
+       request: req,
+       APIURL: 'https://apixat.uv.es'
+   });
   const botid = req.params.botid;
   const conversation = tdclient.supportRequest
   // immediately reply back
