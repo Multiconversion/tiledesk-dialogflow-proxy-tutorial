@@ -53,9 +53,6 @@ app.post("/bot/:botid", (req, res) => {
       const reply_text = result['fulfillmentText']
       const parsed_reply = new TiledeskChatbotUtil().parseReply(reply_text)
       const msg = parsed_reply.message
-      var msg = {
-        "text": reply_text
-      }
       tdclient.sendMessage(msg, function (err) {
         console.log("Message sent.");
       })
