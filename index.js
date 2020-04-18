@@ -51,6 +51,8 @@ app.post("/bot/:botid", (req, res) => {
     // intentDetectionConfidence
     if(res.statusCode === 200) {
       const reply_text = result['fulfillmentText']
+      const parsed_reply = new TiledeskChatbotUtil().parseReply(reply_text)
+      const msg = parsed_reply.message
       var msg = {
         "text": reply_text
       }
