@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const { TiledeskChatbotClient } = require('@tiledesk/tiledesk-chatbot-client');
@@ -37,8 +38,11 @@ app.post("/bot/:botid", (req, res) => {
   res.status(200).send({"success":true});
   // reply messages are sent asynchronously
   const dialogflow_session_id = conversation.request_id
-  const lang = 'en-EN' // lang must be the same of the Dialogflow Agent
-  const credentials = JSON.parse(process.env[botid])
+  const lang = 'es-ES' // lang must be the same of the Dialogflow Agent
+  let rawdata = fs.readFileSync('credentials.json');
+  let json  = JSON.parse(rawdata);
+  console.log(json[botid]);
+  const credentials = json[botid];
   runDialogflowQuery(tdclient.text, dialogflow_session_id, lang, credentials)
   .then(function(result) {
     console.log("query result: ", JSON.stringify(result))
@@ -196,5 +200,9 @@ app.post('/dfwebhook/:project_id', (req, res) => {
 
 var port = process.env.PORT || 3001;
 app.listen(port, () => {
+  //let rawdata = fs.readFileSync('credentials.json');
+  //let json  = JSON.parse(rawdata);
+  //console.log(json["UVinformacio-biblioteques-castellano"]);
   console.log('server started');
 });
+
