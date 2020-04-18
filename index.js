@@ -39,10 +39,7 @@ app.post("/bot/:botid", (req, res) => {
   // reply messages are sent asynchronously
   const dialogflow_session_id = conversation.request_id
   const lang = 'es-ES' // lang must be the same of the Dialogflow Agent
-  let rawdata = fs.readFileSync('credentials.json');
-  let json  = JSON.parse(rawdata);
-  console.log(json[botid]);
-  const credentials = json[botid];
+  const credentials = JSON.parse(process.env[botid])
   runDialogflowQuery(tdclient.text, dialogflow_session_id, lang, credentials)
   .then(function(result) {
     console.log("query result: ", JSON.stringify(result))
