@@ -73,7 +73,7 @@ app.post("/microlang-bot/:botid", (req, res) => {
   res.status(200).send({"success":true});
   // reply messages are sent asynchronously
   const dialogflow_session_id = conversation.request_id
-  const lang = 'en-EN' // lang must be the same of the Dialogflow Agent
+  const lang = 'es-ES' // lang must be the same of the Dialogflow Agent
   console.log("loading credentials...") //, process.env[botid])
   const credentials = JSON.parse(process.env[botid])
   runDialogflowQuery(tdclient.text, dialogflow_session_id, lang, credentials)
